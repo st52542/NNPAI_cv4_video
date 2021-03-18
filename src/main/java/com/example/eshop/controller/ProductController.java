@@ -6,6 +6,7 @@ import com.example.eshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +17,21 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+    @ExceptionHandler(RuntimeException.class)
+    public String handleException() {
+        return "error";
+    }
+
     @GetMapping("/")
     public String showAllProducts(Model model) {
         model.addAttribute("productList", productRepository.findAll());
         return "product-list";
+    }
+
+    @GetMapping("/product-detail/{id}")
+    public String showProductDetail(@PathVariable(required = false) Long id, Model model) {
+        model.addAttribute("product", productRepository.findById(id).get());
+        return "product-detail";
     }
 
     @GetMapping(value = {"/product-form", "/product-form/{id}"})

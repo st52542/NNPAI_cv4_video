@@ -1,6 +1,7 @@
 package com.example.eshop.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,8 +14,7 @@ public class Product {
     private String name;
 
 
-
-    @OneToMany(mappedBy = "id",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
     private Set<OrderHasProduct> productInOrders;
 
     public String getName() {
@@ -40,5 +40,18 @@ public class Product {
 
     public void setProductInOrders(Set<OrderHasProduct> productInOrders) {
         this.productInOrders = productInOrders;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

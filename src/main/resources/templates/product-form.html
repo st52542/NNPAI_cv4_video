@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Add CSS and JS to Thymeleaf</title>
-    <link th:href="@{/main.css}" rel="stylesheet" />
-</head>
+<head th:replace="fragments/head::head"></head>
 <body>
 <h2>Add product</h2>
+<div th:replace="fragments/navigation::navbar"></div>
 <section>
     <form action="#" th:action="@{/product-form-process}" th:object="${product}" method="post">
         <input type="hidden" th:field="*{id}" />
