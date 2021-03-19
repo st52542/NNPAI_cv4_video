@@ -13,6 +13,12 @@ public class Product {
     @Column
     private String name;
 
+    @Column(columnDefinition = "text")
+    private String description;
+
+    @Column
+    private String pathToImage;
+
 
     @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
     private Set<OrderHasProduct> productInOrders;
@@ -53,5 +59,21 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPathToImage() {
+        return pathToImage;
+    }
+
+    public void setPathToImage(String pathToImage) {
+        this.pathToImage = pathToImage;
     }
 }

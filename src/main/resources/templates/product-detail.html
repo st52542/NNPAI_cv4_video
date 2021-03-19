@@ -6,6 +6,9 @@
 <div th:replace="fragments/navigation::navbar"></div>
 <section>
         <h3 th:text ="${product.name}"></h3>
+        <img th:if="${product.pathToImage!=null}" th:src="@{/img/{path} (path=${product.pathToImage})}" width="500">
+        <p th:text ="${product.description}"></p>
+
 </section>
 </body>
 </html>
